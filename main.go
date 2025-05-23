@@ -20,7 +20,7 @@ func main() {
 		functions.Shuffle(play_deck[:])
 
 	case 2:
-		play_deck = functions.LoadDeck()
+		play_deck = functions.Load()
 		fmt.Println(len(card_deck))
 
 		functions.Shuffle(card_deck[:])

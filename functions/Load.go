@@ -17,7 +17,6 @@ func readfiles() {
 	for _, entry := range entries {
 		fmt.Println("-", entry.Name())
 	}
-
 }
 
 func Load() []string {
