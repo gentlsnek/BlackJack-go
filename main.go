@@ -12,23 +12,23 @@ func main() {
 	player1pick := options1()
 
 	switch player1pick {
-	  case 1: 
-	               play_deck = card_deck[:]
-				   fmt.Println("Using new deck")
-				   fmt.Println("Current Deck: ", play_deck)
+	case 1:
+		play_deck = card_deck[:]
+		fmt.Println("Using new deck")
+		fmt.Println("Current Deck: ", play_deck)
 
-				   function.Shuffle
-	
+		functions.Shuffle(play_deck[:])
+
 	case 2:
-		
-	fmt.Println(len(card_deck))
+		play_deck = functions.LoadDeck()
+		fmt.Println(len(card_deck))
 
-	functions.Shuffle(card_deck[:])
+		functions.Shuffle(card_deck[:])
 
-	fmt.Println(card_deck)
+		fmt.Println(card_deck)
 
+	}
 }
-
 func options1() int32 {
 	var options int32
 	fmt.Println("1.New Deck")
