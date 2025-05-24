@@ -3,6 +3,7 @@ package main
 import (
 	"cards/functions"
 	"fmt"
+	"strings"
 )
 
 var card_deck []string = []string{"A_H", "2_H", "3_H", "4_H", "5_H", "6_H", "7_H", "8_H", "9_H", "10_H", "J_H", "Q_H", "K_H",
@@ -15,7 +16,7 @@ func main() {
 
 	switch player1pick {
 	case 1:
-		functions.Shuffle(card_deck[:])
+
 		playGame()
 
 	case 2:
@@ -44,6 +45,8 @@ func options1() int32 {
 }
 
 func playGame() {
+	functions.Shuffle(card_deck[:])
+
 	var playerHand []string
 	var dealerHand []string
 	var outcome string
@@ -53,8 +56,8 @@ func playGame() {
 	playerHand, card_deck = functions.Deal(card_deck[:], 2)
 	dealerHand, card_deck = functions.Deal(card_deck, 2)
 	for {
-		fmt.Println("Player Hand: ", playerHand)
-		fmt.Println("Dealer Hand: ", dealerHand)
+		fmt.Println("Player Hand: ", strings.Join(functions.Print(playerHand), ","))
+		fmt.Println("Dealer Hand: ", strings.Join(functions.Print(dealerHand), ","))
 
 		fmt.Println("Pick an option:")
 		fmt.Println("1. Hit")
@@ -83,11 +86,16 @@ func playGame() {
 
 		if gamestate {
 			fmt.Println(outcome)
-			fmt.Println("press q to quit")
+			fmt.Println("Game saved successfully!")
+			fmt.Println("press q to quit or r to restart game")
 			var input string
 			for {
 				fmt.Scan(&input)
 				if input == "q" || input == "Q" {
+
+					break
+				} else if input == "r" || input == "R" {
+					main()
 					break
 				}
 			}

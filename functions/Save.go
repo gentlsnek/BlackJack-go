@@ -10,7 +10,7 @@ import (
 
 func Save(playerHand []string, dealerHand []string, deck []string, outcome bool) {
 	// Open the file in append mode, create if it doesn't exist
-	filePath := "./game_history.txt"
+	filePath := "./game_history.csv"
 	var gameNum int = 1
 
 	// Check if file exists and count existing games
@@ -41,14 +41,24 @@ func Save(playerHand []string, dealerHand []string, deck []string, outcome bool)
 	writer := csv.NewWriter(file)
 	defer writer.Flush()
 
-	for _, card := range playerHand {
-		writer.Write([]string{strconv.Itoa(gameNum), "player", card})
-	}
-	for _, card := range dealerHand {
-		writer.Write([]string{strconv.Itoa(gameNum), "dealer", card})
-	}
+	// Join dealer and player hands as single fields
+	dealerCards := strings.Join(Print(dealerHand), " ,")
+	playerCards := strings.Join(Print(playerHand), " ,")
 
-	writer.Write([]string{strconv.Itoa(gameNum), "outcome", strconv.FormatBool(outcome)})
+	var win string
+	if outcome {
+		win = "player wins"
+	} else {
+		win = "dealer wins"
+	}
+	outcomeStr := win
 
-	fmt.Println("Game saved successfully!")
+	row := []string{
+		strconv.Itoa(gameNum),
+		dealerCards,
+		playerCards,
+		outcomeStr,
+	}
+	writer.Write(row)
+
 }
