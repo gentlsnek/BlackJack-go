@@ -22,6 +22,18 @@ func main() {
 	case 2:
 		fmt.Println("Previous games")
 		functions.Load()
+		fmt.Println("press q to quit or r to restart game")
+		var input string
+		for {
+			fmt.Scan(&input)
+			if input == "q" || input == "Q" {
+
+				break
+			} else if input == "r" || input == "R" {
+				main()
+				break
+			}
+		}
 
 	case 3:
 		fmt.Println("Exiting")
@@ -55,9 +67,10 @@ func playGame() {
 
 	playerHand, card_deck = functions.Deal(card_deck[:], 2)
 	dealerHand, card_deck = functions.Deal(card_deck, 2)
+
+	fmt.Println("Player Hand: ", strings.Join(functions.Print(playerHand), ","))
+	fmt.Println("Dealer Hand: ", strings.Join(functions.Print(dealerHand), ","))
 	for {
-		fmt.Println("Player Hand: ", strings.Join(functions.Print(playerHand), ","))
-		fmt.Println("Dealer Hand: ", strings.Join(functions.Print(dealerHand), ","))
 
 		fmt.Println("Pick an option:")
 		fmt.Println("1. Hit")
@@ -70,11 +83,15 @@ func playGame() {
 			var newCards []string
 			newCards, card_deck = functions.Deal(card_deck, 1)
 			playerHand = append(playerHand, newCards...)
+			fmt.Println("Player Hand: ", strings.Join(functions.Print(playerHand), ","))
+			fmt.Println("Dealer Hand: ", strings.Join(functions.Print(dealerHand), ","))
 
 		case 2:
 			var newCards []string
 			newCards, card_deck = functions.Deal(card_deck, 1)
 			dealerHand = append(dealerHand, newCards...)
+			fmt.Println("Player Hand: ", strings.Join(functions.Print(playerHand), ","))
+			fmt.Println("Dealer Hand: ", strings.Join(functions.Print(dealerHand), ","))
 
 		default:
 			fmt.Println("Invalid option, please try again.")

@@ -6,3 +6,8 @@ game_id,dealer_cards,player_cards,outcome
 5,7_D A_S,7_S 2_S 5_C 8_H,dealer wins
 6,4_H Q_C 10_C,5_S J_D 6_H,player wins
 7,"9 of Diamonds ,8 of Hearts","10 of Hearts ,6 of Clubs ,Queen of Diamonds",dealer wins
+8,"2 of Diamonds ,Queen of Hearts ,Jack of Spades","8 of Hearts ,Jack of Diamonds",player wins
+9,"9 of Diamonds ,6 of Spades","King of Hearts ,7 of Diamonds ,10 of Hearts",dealer wins
+10,"Queen of Clubs ,Jack of Hearts","6 of Hearts ,7 of Spades ,10 of Clubs",dealer wins
+11,"Jack of Clubs ,Queen of Spades","3 of Diamonds ,King of Hearts ,King of Clubs",dealer wins
+12,"Ace of Hearts ,9 of Spades ,Jack of Diamonds ,Jack of Clubs","Ace of Diamonds ,8 of Hearts",player wins
