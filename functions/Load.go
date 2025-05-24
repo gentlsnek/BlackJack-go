@@ -1,39 +1,28 @@
 package functions
 
 import (
+	"encoding/csv"
 	"fmt"
 	"os"
-	"strings"
 )
 
-func readfiles() {
-	entries, err := os.ReadDir("./decks")
+func Load() {
+	filePath := "./game_history.txt"
+	f, err := os.Open(filePath)
 	if err != nil {
-		fmt.Println("Error reading directory:", err)
+		fmt.Println("Could not open game history:", err)
+		return
+	}
+	defer f.Close()
+
+	reader := csv.NewReader(f)
+	records, err := reader.ReadAll()
+	if err != nil {
+		fmt.Println("Error reading CSV:", err)
 		return
 	}
 
-	fmt.Println("Available saves:")
-	for _, entry := range entries {
-		fmt.Println("-", entry.Name())
+	for _, rec := range records {
+		fmt.Println(rec)
 	}
-}
-
-func Load() []string {
-	readfiles()
-	var filename string
-	fmt.Println("Enter the name of the file to load:")
-	fmt.Scan(&filename)
-
-	file, err := os.ReadFile("./decks/" + filename)
-	if err != nil {
-		fmt.Println("Corrupt save file:", err)
-		return nil
-	}
-
-	deck := string(file)
-	deck = strings.TrimSpace(deck)     // Remove any leading/trailing whitespace
-	cards := strings.Split(deck, "\n") // Split the string into a slice of cards
-
-	return cards
 }
