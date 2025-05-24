@@ -83,6 +83,14 @@ func playGame() {
 
 		if gamestate {
 			fmt.Println(outcome)
+			fmt.Println("press q to quit")
+			var input string
+			for {
+				fmt.Scan(&input)
+				if input == "q" || input == "Q" {
+					break
+				}
+			}
 			functions.Save(playerHand, dealerHand, card_deck, winloss)
 			break
 		}
