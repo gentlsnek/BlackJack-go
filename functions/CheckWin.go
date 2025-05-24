@@ -5,25 +5,21 @@ import (
 	"strings"
 )
 
-// CheckWin checks if the player has won the game
-func CheckWin(playerHand []string, dealerHand []string) (string, bool) {
+func CheckWin(playerHand []string, dealerHand []string) (string, bool, bool) {
 	playerScore := calculateScore(playerHand)
 	dealerScore := calculateScore(dealerHand)
+
 	if playerScore == 21 && len(playerHand) == 2 {
-		return "Player wins with a Blackjack!  dealer score: " + strconv.Itoa(dealerScore) + " player score: " + strconv.Itoa(playerScore), true
+		return "Player wins with a Blackjack! dealer score: " + strconv.Itoa(dealerScore) + " player score: " + strconv.Itoa(playerScore), true, true
 	} else if dealerScore == 21 && len(dealerHand) == 2 {
-		return "Dealer wins with a Blackjack!  dealer score: " + strconv.Itoa(dealerScore) + " player score: " + strconv.Itoa(playerScore), false
+		return "Dealer wins with a Blackjack! dealer score: " + strconv.Itoa(dealerScore) + " player score: " + strconv.Itoa(playerScore), false, true
 	} else if playerScore > 21 {
-		return "Dealer wins! Player busted. dealer score: " + strconv.Itoa(dealerScore) + " player score: " + strconv.Itoa(playerScore), false
+		return "Dealer wins! Player busted. dealer score: " + strconv.Itoa(dealerScore) + " player score: " + strconv.Itoa(playerScore), false, true
 	} else if dealerScore > 21 {
-		return "Player wins! Dealer busted. dealer score: " + strconv.Itoa(dealerScore) + " player score: " + strconv.Itoa(playerScore), true
-	} else if playerScore > dealerScore {
-		return "Player wins!  dealer score: " + strconv.Itoa(dealerScore) + " player score: " + strconv.Itoa(playerScore), true
-	} else if dealerScore > playerScore {
-		return "Dealer wins!  dealer score: " + strconv.Itoa(dealerScore) + " player score: " + strconv.Itoa(playerScore), false
-	} else {
-		return "It's a tie!  dealer score: " + strconv.Itoa(dealerScore) + " player score: " + strconv.Itoa(playerScore), false
+		return "Player wins! Dealer busted. dealer score: " + strconv.Itoa(dealerScore) + " player score: " + strconv.Itoa(playerScore), true, true
 	}
+
+	return "dealer score: " + strconv.Itoa(dealerScore) + " player score: " + strconv.Itoa(playerScore), false, false
 }
 
 func calculateScore(hand []string) int {
